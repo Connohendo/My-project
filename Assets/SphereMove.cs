@@ -33,13 +33,16 @@ public class SphereMove : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Q)){
                 countdown = true;
-            }
-            if (countdown){
-                if (timer < 3){
-                    timer = Time.deltaTime;
-                }
-                else{
-                    UnityEditor.EditorApplication.isPlaying = false;
+                if (countdown)
+                {
+                    if (timer < 3)
+                    {
+                        timer += Time.deltaTime;
+                    }
+                    else
+                    {
+                        UnityEditor.EditorApplication.isPlaying = false;
+                    }
                 }
             }
         }
@@ -49,8 +52,11 @@ public class SphereMove : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other){
+        float newX = Random.Range(-12, 12); 
+        float newZ = Random.Range(-5, 5);
+        other.transform.position = new Vector3(newX, 0, newZ);
         score++;
-        scoreText.text = "Score" + score;
+        scoreText.text = "Score: " + score;
     }
     private void OnTriggerExit(Collider other){
         float newX = Random.Range(-12, 12);
